@@ -59,8 +59,8 @@ def plot_stock_weight():
         answer = str(input("You have another stock ? (y/n) "))
 
     #On multiplie la quantité de stocks avec le prix T pour savoir qui pèse le plus lourd
-    #for i in range(0, len(stock_amt)):
-    #    stock_amt[i]= stock_amt[i]*get_stock_price(stock_name[i])
+    for i in range(0, len(stock_amt)):
+        stock_amt[i]= stock_amt[i]*get_stock_price(stock_name[i])
     
     #On plot le resultat dans un pie chart 
     fig, ax = plt.subplots()
