@@ -28,6 +28,10 @@ def get_stock_name():
     stock_name = str(input("What is your stock name ? "))
     return stock_name.upper()
 
+def get_stock_amount():
+    stock_amt = int(input("How many share have you ? "))
+    return stock_amt
+
 #Plot the stock historic price by closing date 
 def plot_stock_price():
     cls_prc = get_historical_price()
@@ -42,7 +46,29 @@ def plot_stock_price():
 
 ####################################################################################################################
 
+#Plot the weight per stock in a pie chart 
+def plot_stock_weight():
+    stock_name = []
+    stock_amt = []
+    answer = ""
 
+    #On récupère les noms et quantité de stock de la personne 
+    while (answer !="n"):
+        stock_name.append(get_stock_name())
+        stock_amt.append(get_stock_amount())
+        answer = str(input("You have another stock ? (y/n) "))
+
+    #On multiplie la quantité de stocks avec le prix T pour savoir qui pèse le plus lourd
+    #for i in range(0, len(stock_amt)):
+    #    stock_amt[i]= stock_amt[i]*get_stock_price(stock_name[i])
+    
+    #On plot le resultat dans un pie chart 
+    fig, ax = plt.subplots()
+    ax.pie(stock_amt, labels=stock_name, autopct='%1.1f%%')
+    plt.show()
+
+    #On donne la valeur du ptf 
+    print("Portfolio total value: "+ sum(stock_amt))
 
 
 
