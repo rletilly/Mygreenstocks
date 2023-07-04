@@ -71,7 +71,73 @@ def plot_stock_weight():
     print("Portfolio total value: "+ sum(stock_amt))
 
 
+def from_dict_to_dataframe(dictio, dictia):
+    df = pd.DataFrame.from_dict(dictio)
+    df1 = pd.DataFrame.from_dict(dictia)
+    df2 = df[["date","companyName","ESGScore","environmentalScore", "socialScore", "governanceScore"]]
+    df2[["ESGRiskRating"]] = df1[["ESGRiskRating"]]
+    return df2
 
+####################################################################### From dict to Dataframe ########################################################
+dictio = [ {
+    "symbol" : "AAPL",
+    "cik" : "0000320193",
+    "companyName" : "Apple Inc.",
+    "formType" : "10-K",
+    "acceptedDate" : "2021-10-28 18:04:28",
+    "date" : "2021-09-25",
+    "environmentalScore" : 26.22,
+    "socialScore" : 20.36,
+    "governanceScore" : 25.15,
+    "ESGScore" : 23.91,
+    "url" : "https://www.sec.gov/Archives/edgar/data/320193/000032019321000105/0000320193-21-000105-index.htm"
+  }, {
+    "symbol" : "AAPL",
+    "cik" : "0000320193",
+    "companyName" : "Apple Inc.",
+    "formType" : "10-K",
+    "acceptedDate" : "2020-10-29 18:06:25",
+    "date" : "2020-09-26",
+    "environmentalScore" : 21.61,
+    "socialScore" : -1.12,
+    "governanceScore" : 22.72,
+    "ESGScore" : 14.4,
+    "url" : "https://www.sec.gov/Archives/edgar/data/320193/000032019320000096/0000320193-20-000096-index.htm"
+  }, {
+    "symbol" : "AAPL",
+    "cik" : "0000320193",
+    "companyName" : "Apple Inc.",
+    "formType" : "10-K",
+    "acceptedDate" : "2020-10-29 18:06:25",
+    "date" : "2019-09-26",
+    "environmentalScore" : 21.61,
+    "socialScore" : -1.12,
+    "governanceScore" : 22.72,
+    "ESGScore" : 14.4,
+    "url" : "https://www.sec.gov/Archives/edgar/data/320193/000032019320000096/0000320193-20-000096-index.htm"
+  }
+]
+
+dictia = [ {
+    "symbol" : "AAPL",
+    "cik" : "0000320193",
+    "companyName" : "Apple Inc.",
+    "industry" : "ELECTRONIC COMPUTERS",
+    "year" : 2022,
+    "ESGRiskRating" : "B+",
+    "industryRank" : "3 out of 6"
+  }, {
+    "symbol" : "AAPL",
+    "cik" : "0000320193",
+    "companyName" : "Apple Inc.",
+    "industry" : "ELECTRONIC COMPUTERS",
+    "year" : 2021,
+    "ESGRiskRating" : "B",
+    "industryRank" : "6 out of 7"
+  }
+]
+
+print(from_dict_to_dataframe(dictio, dictia))
 
 
 
