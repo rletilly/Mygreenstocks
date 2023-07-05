@@ -1,5 +1,5 @@
 #Alpha vantage API key = W4ZX7JFKKRXMXROD can be use for their search endpoint utility 
-#Financial modeling prep API Key : 963351a791575f888eed177dd9400e77
+#Financial modeling prep API Key : 963351a791575f888eed177dd9400e77 - 963351a791575f888eed177dd9400e77
 
 import string
 import pandas as pd
@@ -18,86 +18,35 @@ def get_stock_price(stck):
     return si.get_live_price(stck)
 
 #Get a stock price and its historic from Yahoo
-def get_historical_price():
-    stock_name = get_stock_name()
-    cls_prc = si.get_data(stock_name)
-    return cls_prc
-
-#Get a stock name from user
-def get_stock_name():
-    stock_name = str(input("What is your stock name ? "))
-    return stock_name.upper()
-
-def get_stock_amount():
-    stock_amt = int(input("How many share have you ? "))
-    return stock_amt
+#def get_historical_price():
+#    stock_name = get_stock_name()
+#    cls_prc = si.get_data(stock_name)
+#    return cls_prc
 
 #Plot the stock historic price by closing date 
-def plot_stock_price():
-    cls_prc = get_historical_price()
-    cls_prc = cls_prc.reset_index(names = "dates")
-    cls_prc.plot(x = 'dates', y = 'close')
-    plt.show()
+#def plot_stock_price():
+#    cls_prc = get_historical_price()
+#    cls_prc = cls_prc.reset_index(names = "dates")
+#    cls_prc.plot(x = 'dates', y = 'close')
+#    plt.show()
 
-
-#Next steps are to get from user the number of shares and compute an average weight of the ptf with the price each year 
-
-########################################################    MAIN   #################################################
-
-####################################################################################################################
-
-#Plot the weight per stock in a pie chart 
-def plot_stock_weight():
-    stock_name = []
-    stock_amt = []
-    answer = ""
-
-    #On récupère les noms et quantité de stock de la personne 
-    while (answer !="n"):
-        stock_name.append(get_stock_name())
-        stock_amt.append(get_stock_amount())
-        answer = str(input("You have another stock ? (y/n) "))
-
-    #On multiplie la quantité de stocks avec le prix T pour savoir qui pèse le plus lourd
-    for i in range(0, len(stock_amt)):
-        stock_amt[i]= stock_amt[i]*get_stock_price(stock_name[i])
-    
-    #On plot le resultat dans un pie chart 
-    fig, ax = plt.subplots()
-    ax.pie(stock_amt, labels=stock_name, autopct='%1.1f%%')
-    plt.show()
-
-    #On donne la valeur du ptf 
-    print("Portfolio total value: "+ sum(stock_amt))
-
-
+#Transform dict to dataframe
 def from_dict_to_dataframe(dictio, dictia):
     df = pd.DataFrame.from_dict(dictio)
     df1 = pd.DataFrame.from_dict(dictia)
     df2 = df[["date","companyName","ESGScore","environmentalScore", "socialScore", "governanceScore"]]
-    df2[["ESGRiskRating"]] = df1[["ESGRiskRating"]]
+    df2.insert(6,"ESGRiskRating",df1[["ESGRiskRating"]])
     return df2
-
-
-
-############################################################################################ changes ###############################################################################################
-import pandas as pd
-import matplotlib.pyplot as plt
-
-def get_stock_price(stck):
-    return si.get_live_price(stck)
 
 #On récupère les noms des clients
 def get_stock_info():
     stock_name = []
     stock_amt = []
     answer = ""
-
     while (answer !="n"):
         stock_name.append(str(input("What is your stock name ? ")).upper())
         stock_amt.append(int(input("How many share have you ? ")))
         answer = str(input("You have another stock ? (y/n) "))
-
     return [stock_name, stock_amt]
 
 #On trouve le poids de chaque titre
@@ -118,85 +67,40 @@ def plot_stock_weight():
     #On donne la valeur du ptf 
     print("Portfolio total value: "+ sum(stock[1]))
 
-#Fonction qui vient changer un dictionnaire en dataframe pour les datas ESG
-def from_dict_to_dataframe(dictio, dictia):
-    df = pd.DataFrame.from_dict(dictio)
-    df1 = pd.DataFrame.from_dict(dictia)
-    df2 = df[["date","companyName","ESGScore","environmentalScore", "socialScore", "governanceScore"]]
-    df2[["ESGRiskRating"]] = df1[["ESGRiskRating"]]
-    return df2
+#Ici on fait la query au site et on transforme les deux dict en un dataframe 
+def get_jsonparsed_data(name):
+    url = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data?symbol="+ name +"&apikey=963351a791575f888eed177dd9400e77")
+    response = urlopen(url, cafile=certifi.where())
+    data = response.read().decode("utf-8")
+    df = json.loads(data)
 
-####################################################################### From dict to Dataframe ########################################################
-dictio = [ {
-    "symbol" : "AAPL",
-    "cik" : "0000320193",
-    "companyName" : "Apple Inc.",
-    "formType" : "10-K",
-    "acceptedDate" : "2021-10-28 18:04:28",
-    "date" : "2021-09-25",
-    "environmentalScore" : 26.22,
-    "socialScore" : 20.36,
-    "governanceScore" : 25.15,
-    "ESGScore" : 23.91,
-    "url" : "https://www.sec.gov/Archives/edgar/data/320193/000032019321000105/0000320193-21-000105-index.htm"
-  }, {
-    "symbol" : "AAPL",
-    "cik" : "0000320193",
-    "companyName" : "Apple Inc.",
-    "formType" : "10-K",
-    "acceptedDate" : "2020-10-29 18:06:25",
-    "date" : "2020-09-26",
-    "environmentalScore" : 21.61,
-    "socialScore" : -1.12,
-    "governanceScore" : 22.72,
-    "ESGScore" : 14.4,
-    "url" : "https://www.sec.gov/Archives/edgar/data/320193/000032019320000096/0000320193-20-000096-index.htm"
-  }, {
-    "symbol" : "AAPL",
-    "cik" : "0000320193",
-    "companyName" : "Apple Inc.",
-    "formType" : "10-K",
-    "acceptedDate" : "2020-10-29 18:06:25",
-    "date" : "2019-09-26",
-    "environmentalScore" : 21.61,
-    "socialScore" : -1.12,
-    "governanceScore" : 22.72,
-    "ESGScore" : 14.4,
-    "url" : "https://www.sec.gov/Archives/edgar/data/320193/000032019320000096/0000320193-20-000096-index.htm"
-  }
-]
+    url2 = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data-ratings?symbol="+ name +"&apikey=963351a791575f888eed177dd9400e77")
+    response2 = urlopen(url2, cafile=certifi.where())
+    data2 = response2.read().decode("utf-8")
+    df2 = json.loads(data2)
 
-dictia = [ {
-    "symbol" : "AAPL",
-    "cik" : "0000320193",
-    "companyName" : "Apple Inc.",
-    "industry" : "ELECTRONIC COMPUTERS",
-    "year" : 2022,
-    "ESGRiskRating" : "B+",
-    "industryRank" : "3 out of 6"
-  }, {
-    "symbol" : "AAPL",
-    "cik" : "0000320193",
-    "companyName" : "Apple Inc.",
-    "industry" : "ELECTRONIC COMPUTERS",
-    "year" : 2021,
-    "ESGRiskRating" : "B",
-    "industryRank" : "6 out of 7"
-  }
-]
+    df_agg = from_dict_to_dataframe(df, df2)
+    return df_agg
 
-#J'ai les prix et les profils il faut queje calcul les poids 
+#Ici je créer une liste de dataframe 
+def dataprep_dict():
+    i = 0
+    df=[]
+    stock_info = get_stock_info() #[0][] = Nom / [1][] = Quantité
+    while(i != len(stock_info[0])):
+        df.append(get_jsonparsed_data(stock_info[0][i]))
+        i+=1
+    print(df)
+     
+    # Il faut encore que je multiplie les poids avec chaque valeurs
+    # et je rends une unique avec en colonne chaque titre et en lignes chaque val 
+
+
+
+#dataprep_dict()
+
+
+#J'ai les prix et les profils il faut que je calcul les poids 
 #Je traduis chaque note en chiffres 
 note = [["CCC","CCC+","CC","CC+","C","C+","B","B+","BB","BB+","BBB","BBB+","A","A+","AA","AA+","AAA","AAA+"],
         [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]]
-
-
-def dataprep_dict():
-    stock_info = get_stock_info()
-    #query to financial data prep with all the name given in stock_info 
-    #tant que tous les noms n'ont pas été parcourus, j'appelle from_dict_to_dataframe(query1, query2)
-    #Alors là soit je recois une liste de dataframe, soit l'essaie de choper un dataframe par boucle 
-    #En partant du principe que j'ai un df par titre:
-    # De la je multiplie les poids avec chaque valeurs
-    # et je rends un dataframe unique avec en colonne chaque titre et en lignes chaque val 
-
