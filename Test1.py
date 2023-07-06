@@ -104,3 +104,48 @@ def dataprep_dict():
 #Je traduis chaque note en chiffres 
 note = [["CCC","CCC+","CC","CC+","C","C+","B","B+","BB","BB+","BBB","BBB+","A","A+","AA","AA+","AAA","AAA+"],
         [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]]
+
+
+
+################################## extract excel - one time only ######################################
+import openpyxl
+
+symbol = [ 
+  "02M.DE", "0A00.L", "0A02.L", "0A05.L", "0A0C.L", "0A0D.L", "0A0E.L", "0A0F.L", "0A0H.L", "0A0I.L", "0A0J.L", 
+  "0A0K.L", "0A0L.L", "0A0M.L", "0A0S.L", "0A0V.L", "0A0W.L", "0A0X.L", "0A10.L", "0A14.L", "0A15.L", "0A18.L", "0A1C.L", 
+  "0A1J.L", "0A1K.L", "0A1L.L", "0A1M.L", "0A1N.L", "0A1O.L", "0A1R.L", "0A1S.L", "0A1U.L", "0A1V.L", "0A1W.L", "0A1X.L",
+  "0A20.L", "0A21.L", "0A23.L", "0A26.L", "0A27.L", "0A28.L", "0A29.L", "0A2A.L", "0A2G.L", "0A2H.L", "0A2I.L", "0A2O.L", 
+  "0A2P.L", "0A2S.L", "0A2T.L", "0A2X.L", "0A2Z.L", "0A33.L", "0A34.L", "0A36.L", "0A37.L", "0A39.L", "0ACT.L", "0AH3.L",
+  "0AH7.L", "0AHI.L", "0AHJ.L", "0AI4.L", "0AJ1.L", "0AR9.L", "0B67.L", "0BDR.L", "0BFA.L", "0BJP.L", "0BNT.L", "0C6Y.L", 
+  "0CDX.L", "0CHZ.L", "0CIJ.L", "0CUM.L", "0CUN.L", "0CXC.L", "0D00.L", "0D1X.L", "0DDP.L", "0DH7.L", "0DHC.L", "0DHJ.L", 
+  "0DI7.L", "0DJI.L", "0DJV.L", "0DK7.L","0DK9.L", "0DKX.L", "0DLI.L", "0DMQ.L", "0DNH.L", "0DNW.L", "0DO7.L", "0DOL.L", 
+  "0DOS.L", "0DP0.L", "0DP4.L", "0DPB.L", "0DPM.L", "0DPU.L", "0DQ7.L", "0DQK.L", "0DQZ.L", "0DRH.L", "0DRV.L", "0DSJ.L", 
+  "0DTF.L", "0DTI.L", "0DTK.L", "0DU3.L", "0DUI.L", "0DUK.L", "0DVE.L", "0DVR.L", "0DWL.L", "0DWV.L", "0DXG.L", "0DXU.L", 
+  "0DYD.L", "0DYQ.L", "0DZ0.L", "0DZC.L", "0DZJ.L", "0E1L.L", "0E1Y.L", "0E3C.L", "0E4K.L", "0E4Q.L", "0E5M.L", "0E6Y.L", 
+  "0E7S.L", "0E7Z.L", "0E9V.L", "0EA2.L", "0EAQ.L", "0EAW.L", "0EBQ.L", "0EDD.L", "0EDE.L"
+]
+
+a = 105/100
+print(a)
+
+
+
+def get_companies_names():
+  url = ("https://financialmodelingprep.com/api/v3/financial-statement-symbol-lists?apikey=963351a791575f888eed177dd9400e77")
+  response = urlopen(url, cafile=certifi.where())
+  data = response.read().decode("utf-8")
+  list_symbol = json.loads(data)
+  iter = len(list_symbol)+51
+  for i in range (0,10): #tester d'abord
+    #Ici j'appelle l'API, dans l'idéal je sors le nom de la companie et j'ajoute le nom à la feuille excel dans la colonne 2
+
+
+  df_symbol = pd.DataFrame(list_symbol, columns=["Symbol"])
+
+  df_symbol.to_excel('output.xls', engine='openpyxl')
+
+  #security name / Company name = ESG score query 
+  # startrow int, default 0 Upper left cell row to dump data frame.
+  # startcol int, default 0 Upper left cell column to dump data frame.
+
+  #En js on demande le nom complet et ont fait le switch dans le df derriere
