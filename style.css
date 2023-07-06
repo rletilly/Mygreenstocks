@@ -26,7 +26,9 @@
     padding: 10px 20px;
     backdrop-filter: blur(4px) saturate(180%);
 }
-.search-bar input{
+.search-bar input[type=text] {
+    -webkit-transition: width 0.15s ease-in-out;
+    transition: width 0.15s ease-in-out;
     background: transparent;
     flex: 1;
     border: 0;
@@ -52,3 +54,18 @@
     cursor: pointer;
 
 }
+#list {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    display: none;
+ }
+ .listItem {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    padding: 5px 20px;
+    color: rgb(231, 220, 220);
+ }
+ .listItem:hover {
+    background-color: rgb(19, 18, 18);
+ }

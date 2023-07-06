@@ -14,16 +14,18 @@ body {
     font-size: 1.2em;
     color: #202C39;
   }
+
   #searchbar {
      padding: 15px;
      border-radius: 5px;
   }
+
   input[type=text] {
      -webkit-transition: width 0.15s ease-in-out;
      transition: width 0.15s ease-in-out;
   }
   #list {
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(12, 11, 11);
     border-radius: 5px;
     display: none;
  }
@@ -33,6 +35,7 @@ body {
     text-decoration: none;
     padding: 5px 20px;
     color: black;
+    cursor: pointer;
  }
  .listItem:hover {
     background-color: lightgrey;

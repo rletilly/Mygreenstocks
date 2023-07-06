@@ -37,6 +37,10 @@ function search() {
         }
         else {
             listItems[i].style.display="flex";
+            listItems[i].onclick = function(){
+                document.getElementById("searchbar").value = this.innerHTML;
+                listContainer.style.display="none";
+            }
             noResults = false; 
         }
     }
