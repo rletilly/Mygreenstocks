@@ -138,7 +138,7 @@ def ESG_Score(note):
         agg_price.append(df3)
     #################################### get Average grade ##############################    
     for i in range(0, len(stock_info[0])):
-        somme += note.index(agg_grade[i]["ESGRiskRating"][0]) * stock_info[1][i] * agg_price[i]["price"][0]
+        somme += (note.index(agg_grade[i]["ESGRiskRating"][0])+1) * stock_info[1][i] * agg_price[i]["price"][0]
         divider += stock_info[1][i]* agg_price[i]["price"][0]
     print("La note globale, moyenne, pondérée la plus récente ("+str(agg_grade[0]["year"][0])+") est de: " + note[round(somme/divider)])
 
