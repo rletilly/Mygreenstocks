@@ -164,7 +164,6 @@ ESG_Score(note)
 
 
 
-
 #Alpha vantage API key = W4ZX7JFKKRXMXROD can be use for their search endpoint utility 
 #Financial modeling prep API Key : 963351a791575f888eed177dd9400e77 - 963351a791575f888eed177dd9400e77
 
@@ -175,6 +174,11 @@ from urllib.request import urlopen
 #from fmp_python.fmp import FMP #A voir si on dégage
 import matplotlib.pyplot as plt
 
+#TO DO : 
+#Brancher la fonction ESG au bouton
+# Do the same but with other metrics
+#Do it for each year (can be done later on)
+#Demander quand vont arriver les données de 2023
 
 #This array is every possible ESG risk score possible with my tool 
 note = ["C","C+","CC","CC+","CCC","CCC+","B","B+","BB","BB+","BBB","BBB+","A","A+","AA","AA+","AAA"]
@@ -182,7 +186,7 @@ note = ["C","C+","CC","CC+","CCC","CCC+","B","B+","BB","BB+","BBB","BBB+","A","A
 #This is used for tkinter 
 stock_list = []
 
-#This fucntion is used anytime a call is made to the APi
+#This fucntion is used anytime a call is made to the APi ---- Il faut mettre un try la dessus et retourner une phrase si pas de réponse de la part de l'API - Seuelemtn si on pred une erreur lors d'une fausse query
 def API_call(url):
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
@@ -210,19 +214,20 @@ def get_stock_info():
     return [stock_name, stock_amt]
 
 #This function aim to help the user find its stock ticker our name
-#Exchanges for now : NYSE,NASDAQ,AMEX,TSX,ETF,EURONEXT,XETRA,ASX,SIX,HKSE,NSE
+#Exchanges for now : NYSE,NASDAQ,AMEX,TSX,ETF,EURONEXT,XETRA,ASX,SIX,HKSE,NSE --------- A voir avec MUTUAL_FUND, INDEX, LSE
 def get_companies_names(name):
-    #print("You forgot the full name of your company or its ticker ? \nGive us some ideas, we'll search for you: ")
-    url = ("https://financialmodelingprep.com/api/v3/search?query="+name+"&limit=10&exchange=NYSE,NASDAQ,AMEX,TSX,ETF,EURONEXT,XETRA,ASX,SIX,HKSE,NSE&apikey=963351a791575f888eed177dd9400e77")
+    url = ("https://financialmodelingprep.com/api/v3/search?query="+name+"&limit=20&exchange=NYSE,NASDAQ,AMEX,TSX,ETF,EURONEXT,XETRA,ASX,SIX,HKSE,NSE&apikey=963351a791575f888eed177dd9400e77")
     df = API_call(url)
-    # Le print doit être passé en remove des autre colonnes pour ne retourner que ces valeurs print(df[["symbol", "name"]])
+    df = df.drop(columns=["currency", "stockExchange"], axis=1)
     return df
 
-#This function returns the last average risk score of a portfolio --> Can be done with the other metrics 
+#This function returns the last average risk score of a portfolio --> Can be done with the other metrics - to be plugged and modify with API and button 
 def ESG_Score(note):
     agg_score = []
     agg_grade = []
     agg_price = []
+    ESG = [0,0,0]
+    divi = [,0,0,0]
     somme = 0
     divider = 0
     stock_info = [["NFLX","AAPL", "LVMHF"],[4,5,1]]#get_stock_info()
@@ -251,11 +256,14 @@ def ESG_Score(note):
         divider += stock_info[1][i]* agg_price[i]["price"][0]
     print("La note globale, moyenne, pondérée la plus récente ("+str(agg_grade[0]["year"][0])+") est de: " + note[round(somme/divider)-1])
 
-
-
-#TO DO : Do the same but with other metrics
-# Do it for each year (can be done later on)
-# Faire l'extract best in class sur un fichier excel - function runable une fois - Demander quand vont arriver les données de 2023
+    ################################### get Average score ###############################
+    for i in range(0, len(stock_info)):
+        for j in range (0,3):
+            ESG[i] += agg_score[j][stock_info[0][j]][0] * stock_info[1][j] * agg_price[j]["price"][0]
+            divi[i] += stock_info[1][j] * agg_price[j]["price"][0]
+    for i in range(0, len(divi)):
+        ESG[i] = ESG[i]/divi[i]
+        print("La note "+ df.columns.values[i] +" moyenne, pondérée la plus récente ("+str(agg_grade[0]["year"][0])+") est de: " + ESG[i]) 
 
 
 ################################################################################################################ PAS UTILISÉS #######################################################################################
@@ -290,10 +298,11 @@ def get_jsonparsed_data(name):
 
     df_agg = from_dict_to_dataframe(df, df2)
     return df_agg
+
+#####################################################################################################################################################################################################################
+######################################################################### GUI - GRAPHICAL USER INTERFACE ############################################################################################################
 #####################################################################################################################################################################################################################
 
-
-######################################################################### GUI #######################################################################
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import *
@@ -309,17 +318,37 @@ def add_stock():
     else:
         messagebox.showwarning("Input Error", "Please enter stock name and amount.")
 
-#Function that call the search function if user forgot it's company tiker
+#Function that call the search function if user forgot it's company tiker -------------------------- NEED TO BE TESTED WITH API CALL - Does it work with non MAJ ??
 def search_stock():
-    stock_name = stock_entry.get()
-    df = pd.DataFrame()
+    stock_name = stock_entry2.get()
+    poss_windo = Tk()
+   
     if stock_name :
-        stock_entry.delete(0, tk.END)
+        poss_windo.title("Possible ticker and stocks")
+        poss_windo.geometry("300x400")
         df = get_companies_names(stock_name)
-        poss_stock = tk.Label()
-        # doit être passé en Label messagebox.showwarning(df)
+        
+        # insert dataframe into the possible stock window
+        n_rows = df.shape[0]
+        n_cols = df.shape[1]
+        column_names = df.columns
+        i=0
+        for j, col in enumerate(column_names):
+            text = Text(poss_windo, width=16, height=1, bg = "#9BC2E6")
+            text.grid(row=i,column=j)
+            text.insert(INSERT, col)
+
+        for i in range(n_rows):
+            for j in range(n_cols):
+                text = Text(poss_windo, width=16, height=1)
+                text.grid(row=i+1,column=j)
+                text.insert(INSERT, df.loc[i][j])
+
+        stock_entry2.delete(0, tk.END)
     else:
         messagebox.showwarning("Input Error", "Please enter stock name.")
+
+    poss_windo.mainloop()
 
 #Function to delete the window once it's done 
 def finish_input(window):
@@ -330,11 +359,12 @@ def finish_input(window):
     else:
         messagebox.showwarning("Input Error", "Please enter at least one stock.")
 
+#Function to take stocks as input 
 def add_stock_window():
     global stock_entry, amount_entry
 
     stock_window = Tk()
-    stock_window.title("Stock Input reve")
+    stock_window.title("Stock Input")
 
     stock_label = tk.Label(stock_window, text="Stock Ticker:")
     stock_label.grid(row=0, column=0, padx=10, pady=10)
@@ -359,7 +389,7 @@ def add_stock_window():
     
     stock_window.mainloop()
     
-
+#Function to have help as a window 
 def add_help_window():
     global stock_entry2
 
@@ -378,6 +408,34 @@ def add_help_window():
     finish_button = tk.Button(help_window, text="Finish", command= lambda: finish_input(help_window))
     finish_button.grid(row=2, column=1, columnspan=1, padx=10, pady=10)
     
+    help_window.mainloop()
+
+#add_stock_window()
 
 
-add_stock_window()
+
+################################################################## WHO ARE THE BEST IN CLASS ?? ###############################################################################
+
+import time
+# Voir le nombre de ticker sur la premiere query et le nombre sur la deuxième 
+#url = ("https://financialmodelingprep.com/api/v3/stock/list?apikey=YOUR_API_KEY") --> Nous donne la possibilité de voir tous les traded and non traded stocks - 25k
+
+def best_in_class(): 
+    url = ("https://financialmodelingprep.com/api/v3/stock/list?apikey=YOUR_API_KEY")
+    df = API_call(url)
+    df = df.drop(columns=["price","exchange"], axis=1)
+    #we write in the excel
+    df.to_excel(excel_writer="Path")
+    for i in range (0,10):
+        url = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data-ratings?symbol="+ df["symbol"][i] +"&apikey=963351a791575f888eed177dd9400e77")
+        df2 = API_call(url)
+        df2 = df2.drop(columns=["symbol","cik","companyName","industry","industryRank"], axis=1)
+        if i % 300 == 0:
+            time.sleep(60)
+        if df2["year"][0] == "2022":
+            df2["ESGRiskRating"][0].to_excel(excel_writer="Path", startcol = 3)
+        else:
+            continue
+        
+
+ 
