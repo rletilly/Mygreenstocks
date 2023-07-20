@@ -1,10 +1,39 @@
 # Mygreenstocks
 
 
-Commencer le site et la visu du site - Voir si on peut faire du html sur UBP 
-S'inspirer du site de calcul de conso carbone perso 
 
-Faire une revue des meilleurs notation ESG avec les meilleurs croissances et les proposer à l'invest - Accès API 
+Dear Rouven, 
+I sent you a written letter a few days ago where I presented my endeavors to join Radicant, and I hope it found you well.
+As promised, I am getting in touch on LinkedIn and would we thrilled to organize a meeting with you or the HR department to have a longer talk about our future steps. 
+Your convenience will be mine for the coming weeks !
+Thank you for your time.
+Best regards,
+Ronan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Dear hiring manager,
