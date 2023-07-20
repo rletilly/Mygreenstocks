@@ -255,20 +255,22 @@ def best_in_class():
     df3 ={'type':["NA"]}
     df3 = pd.DataFrame(df3)
     #43271  df["symbol"][i]
-    for i in range (1,10):
-        url = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data-ratings?symbol="+df["symbol"][i]+"&apikey=963351a791575f888eed177dd9400e77")
+    for i in range (1,43270):
+        url = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data-ratings?symbol="+df["symbol"][i-1]+"&apikey=963351a791575f888eed177dd9400e77")
         response = urlopen(url, cafile=certifi.where())
         data = response.read().decode("utf-8")
         if data !="[]":
             liste = json.loads(data)
             df2 = pd.DataFrame(liste)
-            df2 = df2.drop(columns=["symbol","cik","companyName","industry","industryRank"], axis=1)
+            df2 = df2.drop(columns=["symbol","cik","industry","industryRank"], axis=1)
             #if i % 300 == 0:
             #    time.sleep()
             if df2["year"][0] == 2022:
                 wb = load_workbook('best_in_class.xlsx')
                 sheet = wb.active
                 sheet['B'+str(i+1)] = df2["ESGRiskRating"][0]
+                sheet['C'+str(i+1)] = df2["companyName"][0]
+                
                 wb.save('best_in_class.xlsx')
             else:
                 continue
