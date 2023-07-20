@@ -36,6 +36,7 @@ Ronan
 
 
 
+
 Dear hiring manager,
 
 I am excited to give out my spontaneous candidature for a position at Radicant. Coming from the consulting world, I've watched Radicant disrupt the banking ecosystem while promoting strong commitments on sustainability and investment practices. After taking the time to experience banking in its traditional ways in France, Luxembourg, and Switzerland, I want to take on new challenges and take part in the next banking generation.
