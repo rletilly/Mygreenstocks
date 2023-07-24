@@ -67,6 +67,7 @@ def ESG_Score(stock_info):
     for i in range(0, len(stock_info[0])):
         somme += (note.index(agg_grade[i]["ESGRiskRating"][0])+1) * stock_info[1][i] * agg_price[i]["price"][0]
         divider += stock_info[1][i]* agg_price[i]["price"][0]
+#A mettre dans une boxe en non pas dans le terminal --> A sortir des boucles for 
     print("La note globale, moyenne, pondérée la plus récente ("+str(agg_grade[0]["year"][0])+") est de: " + note[round(somme/divider)-1])
     ################################### get Average score ###############################
     for i in range(0, len(stock_info[0])):
@@ -75,6 +76,7 @@ def ESG_Score(stock_info):
         divi += stock_info[1][i] * agg_price[i]["price"][0]
     for i in range(0, len(ESG)):
         ESG[i] = ESG[i]/divi
+#A mettre dans une boxe en non pas dans le terminal --> A sortir des boucles for 
         print("La note "+ df.columns.values[i] +" moyenne, pondérée la plus récente ("+ str(agg_grade[0]["year"][0])+") est de: " + str(ESG[i])) 
 
 #####################################################################################################################################################################################################################
@@ -198,7 +200,7 @@ def browse_excel_file():
     file_path = filedialog.askopenfilename(filetypes=[("Excel files", "*.xlsx")])
     if file_path:
         df = pd.read_excel(file_path)
-        #function that reads excel and fills "stock_list" with the ticker and the quantity, the list will be call when clicked on finished 
+#function that reads excel and fills "stock_list" with the ticker and the quantity, the list will be call when clicked on finished 
 
 add_stock_window()
 
