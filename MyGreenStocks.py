@@ -23,9 +23,10 @@ def API_call(url):
         df = pd.DataFrame(liste)
         return df
     else:
-        messagebox.showwarning("Wrong API call","No return from the API with this URL:\n " + url + "\n\nMaybe check stock ticker or API key")
+        messagebox.showwarning("Wrong API call","No return from the API with this URL:\n " + url + "\n\nMaybe check stock ticker or API key" 
+        + "\nKeep in mind that it could also mean that there is no data for this ticker")
 
-#This function aim to help the user find its stock ticker our name
+#This function aim to help the user find its stock ticker or name
 #Exchanges for now : NYSE,NASDAQ,AMEX,TSX,ETF,EURONEXT,XETRA,ASX,SIX,HKSE,NSE,LSE,INDEX
 def get_companies_names(name):
     url = ("https://financialmodelingprep.com/api/v3/search?query="+name+"&limit=20&exchange=NYSE,NASDAQ,AMEX,TSX,ETF,EURONEXT,XETRA,ASX,SIX,HKSE,NSE,LSE,INDEX&apikey=963351a791575f888eed177dd9400e77")
@@ -67,17 +68,34 @@ def ESG_Score(stock_info):
     for i in range(0, len(stock_info[0])):
         somme += (note.index(agg_grade[i]["ESGRiskRating"][0])+1) * stock_info[1][i] * agg_price[i]["price"][0]
         divider += stock_info[1][i]* agg_price[i]["price"][0]
-#A mettre dans une boxe en non pas dans le terminal --> A sortir des boucles for 
-    print("La note globale, moyenne, pondérée la plus récente ("+str(agg_grade[0]["year"][0])+") est de: " + note[round(somme/divider)-1])
+#A mettre dans une boxe en non pas dans le terminal --> A tester
+    messagebox.showwarning("Your results","La note globale, moyenne, pondérée la plus récente ("+str(agg_grade[0]["year"][0])+") est de: " + note[round(somme/divider)-1])
     ################################### get Average score ###############################
     for i in range(0, len(stock_info[0])):
         for j in range (0,len(stock_info[0])):
             ESG[i] += agg_score[j][str(df.columns[i])][0] * stock_info[1][j] * agg_price[j]["price"][0]
         divi += stock_info[1][i] * agg_price[i]["price"][0]
-    for i in range(0, len(ESG)):
-        ESG[i] = ESG[i]/divi
-#A mettre dans une boxe en non pas dans le terminal --> A sortir des boucles for 
-        print("La note "+ df.columns.values[i] +" moyenne, pondérée la plus récente ("+ str(agg_grade[0]["year"][0])+") est de: " + str(ESG[i])) 
+#A mettre dans une boxe en non pas dans le terminal --> A tester 
+    messagebox.showwarning("Your results","La note "+ df.columns.values[0] +" moyenne, pondérée la plus récente ("+ str(agg_grade[0]["year"][0])+") est de: " + str(ESG[0]/divi)
+    +"\n"+"La note "+ df.columns.values[1] +" moyenne, pondérée la plus récente ("+ str(agg_grade[0]["year"][0])+") est de: " + str(ESG[1]/divi) +"\n"+
+    "La note "+ df.columns.values[2] +" moyenne, pondérée la plus récente ("+ str(agg_grade[0]["year"][0])+") est de: " + str(ESG[2]/divi)) 
+
+#Reads an excel file given by user that respects the topology --> A tester avec le call à L'API
+def read_excel(df):
+    for i in range (0, len(df)):
+        if df["ticker"][i]:
+            stock_list[0].append(df["ticker"][i])
+        else:
+            tik = get_companies_names(df["name"][i])
+            stock_list[0].append(tik["Companyname"][0]) # Vérifier que ce soit bien le nom 
+
+        if df["amount"][i] != 0 and not isinstance(df["amount"][i], str):
+            stock_list[1].append(df["amount"][i])
+        else:
+            messagebox.showwarning("Excel Reading", "We do not accept other than numerical quantity, please check your file")
+            quit()
+ 
+    return stock_list
 
 #####################################################################################################################################################################################################################
 ######################################################################### GUI - GRAPHICAL USER INTERFACE ############################################################################################################
@@ -196,11 +214,12 @@ def add_help_window():
 
     help_window.mainloop()
 
+#function that reads excel and fills "stock_list" with the ticker and the quantity, the list will be call when clicked on finished 
 def browse_excel_file():
     file_path = filedialog.askopenfilename(filetypes=[("Excel files", "*.xlsx")])
     if file_path:
         df = pd.read_excel(file_path)
-#function that reads excel and fills "stock_list" with the ticker and the quantity, the list will be call when clicked on finished 
+        read_excel(df)
 
 add_stock_window()
 
