@@ -8,7 +8,6 @@ from urllib.request import urlopen
 import matplotlib.pyplot as plt
 
 #TO DO : 
-#Import excel file
 #Demander quand vont arriver les données de 2023
 
 #This is used for tkinter 
