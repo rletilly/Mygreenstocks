@@ -1,5 +1,4 @@
-#Alpha vantage API key = W4ZX7JFKKRXMXROD can be use for their search endpoint utility 
-#Financial modeling prep API Key : 963351a791575f888eed177dd9400e77 - 963351a791575f888eed177dd9400e77
+#Financial modeling prep API Key : 963351a791575f888eed177dd9400e77
 
 import pandas as pd
 import certifi
@@ -12,6 +11,7 @@ import matplotlib.pyplot as plt
 
 #This is used for tkinter 
 stock_list = [[],[]]
+Api_Key = "963351a791575f888eed177dd9400e77"
 
 #This fucntion is used anytime a call is made to the APi
 def API_call(url):
@@ -28,7 +28,7 @@ def API_call(url):
 #This function aim to help the user find its stock ticker or name
 #Exchanges for now : NYSE,NASDAQ,AMEX,TSX,ETF,EURONEXT,XETRA,ASX,SIX,HKSE,NSE,LSE,INDEX
 def get_companies_names(name):
-    url = ("https://financialmodelingprep.com/api/v3/search?query="+name+"&limit=20&exchange=NYSE,NASDAQ,AMEX,TSX,ETF,EURONEXT,XETRA,ASX,SIX,HKSE,NSE,LSE,INDEX&apikey=963351a791575f888eed177dd9400e77")
+    url = ("https://financialmodelingprep.com/api/v3/search?query="+name+"&limit=20&exchange=NYSE,NASDAQ,AMEX,TSX,ETF,EURONEXT,XETRA,ASX,SIX,HKSE,NSE,LSE,INDEX&apikey="+Api_Key)
     df = API_call(url)
     df = df.drop(columns=["currency", "stockExchange"], axis=1)
     return df
@@ -46,38 +46,37 @@ def ESG_Score(stock_info):
     
     for i in range(0, len(stock_info[0])):
         ################################## get ESG score #################################
-        url = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data?symbol="+stock_info[0][i]+"&apikey=963351a791575f888eed177dd9400e77")
+        url = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data?symbol="+stock_info[0][i]+"&apikey="+Api_Key)
         df = API_call(url)
         df = df.drop(columns=["symbol","cik","companyName","formType","acceptedDate","date","url"], axis=1)
         ##################################################################################
         ################################## get ESG grade #################################
-        url = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data-ratings?symbol="+stock_info[0][i]+"&apikey=963351a791575f888eed177dd9400e77")
+        url = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data-ratings?symbol="+stock_info[0][i]+"&apikey="+Api_Key)
         df2 = API_call(url)
         df2 = df2.drop(columns=["symbol","cik","companyName","industry","industryRank"], axis=1)
-        print(df2)
         ##################################################################################
         ################################# get Stock Price ################################
-        url = ("https://financialmodelingprep.com/api/v3/quote-short/"+stock_info[0][i]+"?apikey=963351a791575f888eed177dd9400e77")
+        url = ("https://financialmodelingprep.com/api/v3/quote-short/"+stock_info[0][i]+"?apikey="+Api_Key)
         df3 = API_call(url)
         df3 = df3.drop(columns=["symbol", "volume"], axis=1)
         #################################################################################
         agg_score.append(df)
         agg_grade.append(df2)
         agg_price.append(df3)
-    #################################### get Average grade ##############################    len(stock_info) = 2
+    #################################### get Average grade ##############################
     for i in range(0, len(stock_info[0])):
         somme += (note.index(agg_grade[i]["ESGRiskRating"][0])+1) * stock_info[1][i] * agg_price[i]["price"][0]
         divider += stock_info[1][i]* agg_price[i]["price"][0]
-    messagebox.showinfo("Your results","La note globale, moyenne, pondérée la plus récente ("+str(agg_grade[0]["year"][0])+") est de: " + note[round(somme/divider)-1])
+    messagebox.showinfo("Your results","La note globale, moyenne la plus récente est de: " + note[round(somme/divider)-1])
     ################################### get Average score ###############################
     for i in range(0, len(stock_info[0])): 
         for j in range(0, 3):#note 
             ESG[j] += agg_score[i][str(df.columns[j])][0] * stock_info[1][i]* agg_price[i]["price"][0]
         divi += stock_info[1][i] * agg_price[i]["price"][0]
 
-    messagebox.showinfo("Your results","La note "+ df.columns.values[0] +" moyenne la plus récente est de: " + str(ESG[0]/divi) +
-                        "\n\n"+"La note "+ df.columns.values[1] +" moyenne la plus récente est de: " + str(ESG[1]/divi) +
-                        "\n\n"+"La note "+ df.columns.values[2] +" moyenne la plus récente est de: " + str(ESG[2]/divi)) 
+    messagebox.showinfo("Your results","La note "+ df.columns.values[0] +" moyenne la plus récente est de: " + str(round(ESG[0]/divi,2)) +
+                        "\n\n"+"La note "+ df.columns.values[1] +" moyenne la plus récente est de: " + str(round(ESG[1]/divi, 2)) +
+                        "\n\n"+"La note "+ df.columns.values[2] +" moyenne la plus récente est de: " + str(round(ESG[2]/divi,2))) 
 
 #Reads an excel file given by user that respects the topology
 def read_excel(df):
@@ -230,7 +229,7 @@ from openpyxl import load_workbook
 #Function that first write all tickers available in an excel and then check for each ticker it's ESG Risk Score
 #This is a workaround to a query it don't have access to yet - Takes a few hours to complete - 40K records
 def best_in_class(): 
-    url = ("https://financialmodelingprep.com/api/v3/financial-statement-symbol-lists?apikey=963351a791575f888eed177dd9400e77")
+    url = ("https://financialmodelingprep.com/api/v3/financial-statement-symbol-lists?apikey="+Api_Key)
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
     liste = json.loads(data)
@@ -240,7 +239,7 @@ def best_in_class():
     wb = load_workbook('best_in_class.xlsx')
     sheet = wb.active
     for i in range (1,len(df)): 
-        url = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data-ratings?symbol="+df["symbol"][i-1]+"&apikey=963351a791575f888eed177dd9400e77")
+        url = ("https://financialmodelingprep.com/api/v4/esg-environmental-social-governance-data-ratings?symbol="+df["symbol"][i-1]+"&apikey="+Api_Key)
         response = urlopen(url, cafile=certifi.where())
         data = response.read().decode("utf-8")    
         if data !="[]":
