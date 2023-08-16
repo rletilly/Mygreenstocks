@@ -1,6 +1,6 @@
 # Mygreenstocks
 
-This project is born so that people can easily have a picture of how sustainable their stock portfolio is.
+This project is born so that people could easily have a picture of how sustainable their stock portfolio is.
 
 Please keep in min that I am using my personal API_KEY for now, we will be limited to 300 query a minute (if still up). Else, you can easily change the API_KEY in the code, line 14. 
 
