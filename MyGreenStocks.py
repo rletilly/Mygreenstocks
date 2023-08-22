@@ -21,7 +21,7 @@ def API_call(url):
         return df
     else:
         messagebox.showwarning("Erreur appel de l'API","Pas de retour de la part de l'API avec cet URL:\n " + url + "\n\nCorrigez le ticker ou la clé API" 
-        + "\nKeep in mind that it could also mean that there is no data for this ticker")
+        + "\nUne erreur d'appel peut aussi vouloir dire qu'il n'existe pas de données sur le ticker fourni")
 
 #This function aim to help the user find its stock ticker or name
 #Exchanges for now : NYSE,NASDAQ,AMEX,TSX,ETF,EURONEXT,XETRA,ASX,SIX,HKSE,NSE,LSE,INDEX
@@ -88,7 +88,7 @@ def read_excel(df):
         if df["amount"][i] != 0 and not isinstance(df["amount"][i], str):
             stock_list[1].append(df["amount"][i])
         else:
-            messagebox.showwarning("Excel Reading", "We do not accept other than numerical quantity, please check your file")
+            messagebox.showwarning("Lecture fichier excel", "Nous n'acceptons que des quantités mumérique, Vérifiez votre fichier")
             quit()
  
     return stock_list
