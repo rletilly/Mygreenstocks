@@ -112,7 +112,7 @@ def add_stock():
             stock_entry.delete(0, tk.END)
             amount_entry.delete(0, tk.END)
     except:
-        messagebox.showwarning("Input Error", "Please enter stock name and amount.")
+        messagebox.showwarning("Erreur Input", "Veuillez entrer un ticker et une quantité.")
         stock_entry.delete(0, tk.END)
         amount_entry.delete(0, tk.END)
 
@@ -122,7 +122,7 @@ def search_stock():
     poss_windo = Tk()
    
     if stock_name :
-        poss_windo.title("Possible ticker and stocks")
+        poss_windo.title("Ticker et Stocks possibles")
         poss_windo.geometry("450x400")
         df = get_companies_names(stock_name)
         
@@ -144,7 +144,7 @@ def search_stock():
 
         stock_entry2.delete(0, tk.END)
     else:
-        messagebox.showwarning("Input Error", "Please enter stock name.")
+        messagebox.showwarning("Erreur Input", "Veuillez entrer un nom de stock")
 
     poss_windo.mainloop()
 
@@ -154,7 +154,7 @@ def finish_input(window):
         window.destroy()
         ESG_Score(stock_list)
     else:
-        messagebox.showwarning("Input Error", "Please enter at least one stock.")
+        messagebox.showwarning("Erreur Input", "Veuillez entrer au moins 1 stock.")
         
 #Function to take stocks as input 
 def add_stock_window():
