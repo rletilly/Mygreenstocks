@@ -20,7 +20,7 @@ def API_call(url):
         df = pd.DataFrame(liste)
         return df
     else:
-        messagebox.showwarning("Wrong API call","No return from the API with this URL:\n " + url + "\n\nMaybe check stock ticker or API key" 
+        messagebox.showwarning("Erreur appel de l'API","Pas de retour de la part de l'API avec cet URL:\n " + url + "\n\nCorrigez le ticker ou la clé API" 
         + "\nKeep in mind that it could also mean that there is no data for this ticker")
 
 #This function aim to help the user find its stock ticker or name
