@@ -6,9 +6,6 @@ import json
 from urllib.request import urlopen
 import matplotlib.pyplot as plt
 
-#TO DO : 
-#Demander quand vont arriver les données de 2023
-
 #This is used for tkinter 
 stock_list = [[],[]]
 Api_Key = "963351a791575f888eed177dd9400e77"
