@@ -6,11 +6,12 @@ import json
 from urllib.request import urlopen
 import matplotlib.pyplot as plt
 
-#This is used for tkinter 
-stock_list = [[],[]]
 Api_Key = "963351a791575f888eed177dd9400e77"
 
-#This fucntion is used anytime a call is made to the APi
+#This is used for tkinter 
+stock_list = [[],[]]
+
+#This fucntion is used anytime a call is made to the API
 def API_call(url):
     response = urlopen(url, cafile=certifi.where())
     data = response.read().decode("utf-8")
