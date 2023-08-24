@@ -5,6 +5,7 @@ import certifi
 import json
 from urllib.request import urlopen
 import matplotlib.pyplot as plt
+import ssl
 
 Api_Key = "963351a791575f888eed177dd9400e77"
 
@@ -13,7 +14,8 @@ stock_list = [[],[]]
 
 #This fucntion is used anytime a call is made to the API
 def API_call(url):
-    response = urlopen(url, cafile=certifi.where())
+    context = ssl.create_default_context(cafile=certifi.where())
+    response = urlopen(url, context=context)
     data = response.read().decode("utf-8")
     if data != "[]":
         liste = json.loads(data)
