@@ -77,7 +77,13 @@ def ESG_Score(stock_info):
     messagebox.showinfo("Your results","La note "+ df.columns.values[0] +" moyenne la plus récente est de: " + str(round(ESG[0]/divi,2)) +
                         "\n\n"+"La note "+ df.columns.values[1] +" moyenne la plus récente est de: " + str(round(ESG[1]/divi, 2)) +
                         "\n\n"+"La note "+ df.columns.values[2] +" moyenne la plus récente est de: " + str(round(ESG[2]/divi,2))) 
+    result_to_excel(df,df2,stock_info)
 
+
+def result_to_excel(df, df2, stock_info):
+    #write results in an excel -> name/sheet name could be given by user 
+
+    
 #Reads an excel file given by user that respects the topology
 def read_excel(df):
     for i in range (0, len(df)):
