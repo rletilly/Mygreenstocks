@@ -17,7 +17,7 @@ Here's what you can expect while using this tool :
 
 ![image](https://github.com/rletilly/Mygreenstocks/assets/55627422/328efca4-bf0f-4d8b-9b7b-e0a02110b666)
 
-This is the current window from where you will start your operations. 
+This is the current window from where you will start your operations./
 "Stock Ticker" is for stock symbols (NETFLIX -> NFLX) 
 "Amount" only accepts int numbers, for the number of stocks you have
 "Add Stock" is to be pressed once you've succeddfully added a stock name and an amount
