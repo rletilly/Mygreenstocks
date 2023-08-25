@@ -31,11 +31,11 @@ Once you press the "Finish" button, a Charging indicator will show on the screen
 <br> 
 Two boxes are to be expected : <br>
 
-<img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/74bdaa8f-a26c-4245-83c2-607620f3b241" alt="drawing" width="200"/>
+<img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/74bdaa8f-a26c-4245-83c2-607620f3b241" alt="drawing" width="400"/>
 <br>
 The most recent weighted ESG risk score of your portfolio. And <br>
 
-<img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/95ae9957-30a0-46c9-aecb-0ba391c0e0f3" alt="drawing" width="2
+<img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/95ae9957-30a0-46c9-aecb-0ba391c0e0f3" alt="drawing" width="400"/>
 <br>
 The four most recent weighted grade of your Ptf.
 
