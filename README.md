@@ -15,8 +15,8 @@ In case you wanted to download you stock portfolio directly, you can import it i
 
 Here's what you can expect while using this tool : 
 
-![image](https://github.com/rletilly/Mygreenstocks/assets/55627422/328efca4-bf0f-4d8b-9b7b-e0a02110b666)
 <img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/328efca4-bf0f-4d8b-9b7b-e0a02110b666" alt="drawing" width="200"/>
+
 This is the current window from where you will start your operations.
 
 - **"Stock Ticker"** is for stock symbols (NETFLIX -> NFLX
@@ -31,11 +31,11 @@ Once you press the "Finish" button, a Charging indicator will show on the screen
 <br> 
 Two boxes are to be expected : <br>
 
-![image](https://github.com/rletilly/Mygreenstocks/assets/55627422/74bdaa8f-a26c-4245-83c2-607620f3b241)
+<img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/74bdaa8f-a26c-4245-83c2-607620f3b241" alt="drawing" width="200"/>
 <br>
 The most recent weighted ESG risk score of your portfolio. And <br>
 
-![image](https://github.com/rletilly/Mygreenstocks/assets/55627422/95ae9957-30a0-46c9-aecb-0ba391c0e0f3)
+<img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/95ae9957-30a0-46c9-aecb-0ba391c0e0f3" alt="drawing" width="2
 <br>
 The four most recent weighted grade of your Ptf.
 
