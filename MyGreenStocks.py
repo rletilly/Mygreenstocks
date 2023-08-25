@@ -79,7 +79,7 @@ def ESG_Score(stock_info):
     messagebox.showinfo("Your results","La note "+ df.columns.values[0] +" moyenne la plus récente est de: " + str(round(ESG[0]/divi,2)) +
                         "\n\n"+"La note "+ df.columns.values[1] +" moyenne la plus récente est de: " + str(round(ESG[1]/divi, 2)) +
                         "\n\n"+"La note "+ df.columns.values[2] +" moyenne la plus récente est de: " + str(round(ESG[2]/divi,2))) 
-    result_to_excel(agg_score)
+    result_to_excel(agg_score,agg_grade)
 
 #Reads an excel file given by user that respects the topology
 def read_excel(df):
@@ -105,17 +105,16 @@ def browse_excel_file():
         df = pd.read_excel(file_path)
         read_excel(df) 
 
-
-def result_to_excel(agg_score):
+#Print your results to an excel
+def result_to_excel(agg_score,agg_grade):
     headers = ["Stock","ESGRiskRating","environmentalScore", "socialScore","governanceScore","ESGScore"]
-    val = []
-    wb = load_workbook('results.xlsx')
-    rend = pd.DataFrame({headers[0]: stock_list[0]})
+    val1 = []
+    val2 = []
     for i in range(0,len(stock_list[0])):
-        val.append(agg_score[i].iloc[0].tolist())
+        val1.append(agg_score[i].iloc[0].tolist())
+        val2.append(agg_grade[i]["ESGRiskRating"][0])
+    tval1 = list(map(list, zip(*val1)))
+    tval2 = list(map(list, zip(*val2)))
     
-    tval = list(map(list, zip(*val)))
-    print(tval)
-     
-    wb.save('results.xlsx')
-    
+    rend = pd.DataFrame({headers[0]: stock_list[0], headers[1] : tval2[0], headers[2] : tval1[0], headers[3] : tval1[1], headers[4] : tval1[2], headers[5] : tval1[3]})
+    rend.to_excel('results.xlsx', index=False)

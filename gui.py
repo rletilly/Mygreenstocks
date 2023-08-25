@@ -2,6 +2,8 @@
 ######################################################################### GUI - GRAPHICAL USER INTERFACE ############################################################################################################
 #####################################################################################################################################################################################################################
 import tkinter as tk
+import time
+import threading
 from tkinter import *
 from MyGreenStocks import *
 
@@ -55,6 +57,8 @@ def search_stock():
 #Function to delete the window once it's done 
 def finish_input(window):
     if stock_list:
+        animation_thread = threading.Thread(target=charging_animation)
+        animation_thread.start()
         window.destroy()
         ESG_Score(stock_list)
     else:
@@ -114,4 +118,21 @@ def add_help_window():
 
     help_window.mainloop()
 
-add_stock_window()
+def charging_animation():
+    messages = ["Charging |", "Charging /", "Charging -", "Charging \\"]
+    i = 0
+    
+    while not animation_stop_event.is_set():
+        message = messages[i % len(messages)]  # Cycle through messages
+        print(message, end="\r")  # Print message and move cursor to the beginning of the line
+        time.sleep(0.5)  # Wait for a short duration (e.g., 0.5 seconds)
+        i += 1
+
+def main():
+    global animation_stop_event
+    animation_stop_event = threading.Event()
+    add_stock_window()
+    animation_stop_event.set()  # Signal the animation thread to stop
+    print("The function is done.")
+
+#main()
