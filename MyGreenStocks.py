@@ -41,7 +41,7 @@ def ESG_Score(stock_info):
     agg_score = []
     agg_grade = []
     agg_price = []
-    ESG = [0,0,0]
+    ESG = [0,0,0,0]
     somme = 0
     divi = 0
     divider = 0
@@ -72,13 +72,14 @@ def ESG_Score(stock_info):
     messagebox.showinfo("Your results","La note globale, moyenne la plus récente est de: " + note[round(somme/divider)-1])
     ################################### get Average score ###############################
     for i in range(0, len(stock_info[0])): 
-        for j in range(0, 3):#note 
+        for j in range(0, 4):#note 
             ESG[j] += agg_score[i][str(df.columns[j])][0] * stock_info[1][i]* agg_price[i]["price"][0]
         divi += stock_info[1][i] * agg_price[i]["price"][0]
 
     messagebox.showinfo("Your results","La note "+ df.columns.values[0] +" moyenne la plus récente est de: " + str(round(ESG[0]/divi,2)) +
                         "\n\n"+"La note "+ df.columns.values[1] +" moyenne la plus récente est de: " + str(round(ESG[1]/divi, 2)) +
-                        "\n\n"+"La note "+ df.columns.values[2] +" moyenne la plus récente est de: " + str(round(ESG[2]/divi,2))) 
+                        "\n\n"+"La note "+ df.columns.values[2] +" moyenne la plus récente est de: " + str(round(ESG[2]/divi,2)) +
+                        "\n\n"+"La note "+ df.columns.values[3] +" moyenne la plus récente est de: " + str(round(ESG[3]/divi,2)))
     result_to_excel(agg_score,agg_grade)
 
 #Reads an excel file given by user that respects the topology

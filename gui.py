@@ -135,4 +135,4 @@ def main():
     animation_stop_event.set()  # Signal the animation thread to stop
     print("The function is done.")
 
-#main()
+main()
