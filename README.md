@@ -29,7 +29,6 @@ This is the window from where you will start your operations.
 - **"Finish"** MUST be pressed once you've finished using this window (even after loading an excel file)
 
 <h3>Step 2</h3>
-<br>
 Once you press the "Finish" button, a Charging indicator will show on the screen until the code has finished.
 <br> 
 Two boxes are to be expected : <br>
@@ -48,5 +47,3 @@ The four most recent weighted grades of your Ptf.
 
 <h3>Step 3</h3>
 Once you have clicked Ok on both windows the detailed results will be charged in the "results.xlsx" file. 
-
-
