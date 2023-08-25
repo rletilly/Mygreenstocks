@@ -30,10 +30,12 @@ This is the current window from where you will start your operations.
 Once you press the "Finish" button, a Charging indicator will show on the screen until the code has finished.
 <br> 
 Two boxes are to be expected : <br>
+<br>
 
 <img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/74bdaa8f-a26c-4245-83c2-607620f3b241" alt="drawing" width="400"/>
 <br>
 The most recent weighted ESG risk score of your portfolio. And <br>
+<br>
 
 <img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/95ae9957-30a0-46c9-aecb-0ba391c0e0f3" alt="drawing" width="400"/>
 <br>
