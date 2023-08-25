@@ -4,7 +4,6 @@ import pandas as pd
 import certifi
 import json
 from urllib.request import urlopen
-from openpyxl import load_workbook
 from tkinter import messagebox
 from tkinter import filedialog
 import ssl
