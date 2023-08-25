@@ -115,7 +115,6 @@ def result_to_excel(agg_score,agg_grade):
         val1.append(agg_score[i].iloc[0].tolist())
         val2.append(agg_grade[i]["ESGRiskRating"][0])
     tval1 = list(map(list, zip(*val1)))
-    tval2 = list(map(list, zip(*val2)))
     
-    rend = pd.DataFrame({headers[0]: stock_list[0], headers[1] : tval2[0], headers[2] : tval1[0], headers[3] : tval1[1], headers[4] : tval1[2], headers[5] : tval1[3]})
+    rend = pd.DataFrame({headers[0]: stock_list[0], headers[1] : val2, headers[2] : tval1[0], headers[3] : tval1[1], headers[4] : tval1[2], headers[5] : tval1[3]})
     rend.to_excel('results.xlsx', index=False)
