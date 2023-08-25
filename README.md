@@ -53,7 +53,9 @@ Once you have clicked Ok on both windows the detailed results will be charged in
 
 <h3>Help Button</h3>
 In the "Help" box :
-
+<p align="center">
+<img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/fda870a2-a681-41b8-b1c4-f62b3ae463a6" alt="drawing" width="400"/>
+</p>
 You can either enter **a ticker or a name**. It **doesn't have to be written entirely**, the query will search and display the closest ticker/name it has of your input. <br>
 The number of response you get is fixed to 20 but it can be changed in the code (line 33 - MyGreenStocks.py). <br>
 **Carefull** This query is not bulletproof, I've found some results that were not working with other queries later one. Google will still be your best friend if you do not remember your ticker. <br>
