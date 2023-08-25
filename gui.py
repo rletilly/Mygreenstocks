@@ -5,7 +5,7 @@ import tkinter as tk
 import time
 import threading
 from tkinter import *
-from MyGreenStocks import *
+from mygreenstocks import *
 
 #Function that takes user input and stores it in a global variable  
 def add_stock():
