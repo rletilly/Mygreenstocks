@@ -16,7 +16,7 @@ In case you wanted to download you stock portfolio directly, you can import it i
 Here's what you can expect while using this tool : 
 
 ![image](https://github.com/rletilly/Mygreenstocks/assets/55627422/328efca4-bf0f-4d8b-9b7b-e0a02110b666)
-
+<img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/328efca4-bf0f-4d8b-9b7b-e0a02110b666" alt="drawing" width="200"/>
 This is the current window from where you will start your operations.
 
 - **"Stock Ticker"** is for stock symbols (NETFLIX -> NFLX
