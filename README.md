@@ -2,22 +2,23 @@
 
 This project is born so that people could easily have a picture of how sustainable their stock portfolio is.
 
-Please keep in min that I am using my personal API_KEY for now, we will be limited to 300 query a minute (if still up). Else, you can easily change the API_KEY in the code, line 14. 
-
-You will find a Python file to run on your machine or a .exe button in the dist file.
+Please keep in min that I am using my personal API_KEY for now, we will be limited to **300 query a minute**. Else, you can easily change the API_KEY in the code, line 14. 
 
 "best_in_class.xlsx" is an extract of the best stocks given by "Financial Data Prep". Keep in mind that this is regarding "ESG Risk Score" and not other grades.
 
 In case you wanted to download you stock portfolio directly, you can import it if it respects the format given in the file "your_stock_example.xlsx"
 
+The "gui.py" file has to be runned for the tool to launch.
 
 # Walkthrough
 
-Here's what you can expect while using this tool : 
-
+<h3>Step 1</h3>
+Here's what will be displayed at first : 
+<p align="center"> 
 <img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/328efca4-bf0f-4d8b-9b7b-e0a02110b666" alt="drawing" width="200"/>
+</p>
 
-This is the current window from where you will start your operations.
+This is the window from where you will start your operations.
 
 - **"Stock Ticker"** is for stock symbols (NETFLIX -> NFLX
 - **"Amount"** only accepts int numbers, for the number of stocks you have
@@ -25,7 +26,9 @@ This is the current window from where you will start your operations.
 
 - **"Import Excel"** is a function that can be used if you have a Ptf to load following the example in "your_stock_example.xlsx" file <br>
 - **"Help"** can be used if you do not know the ticker of your stock <br>
-- **"Finish"** MUST be pressed once you've finished using this window (even after loading an excel file) <br>
+- **"Finish"** MUST be pressed once you've finished using this window (even after loading an excel file)
+
+<h3>Step 2</h3>
 <br>
 Once you press the "Finish" button, a Charging indicator will show on the screen until the code has finished.
 <br> 
@@ -41,7 +44,9 @@ The most recent weighted ESG risk score of your portfolio. And <br>
 <img src="https://github.com/rletilly/Mygreenstocks/assets/55627422/95ae9957-30a0-46c9-aecb-0ba391c0e0f3" alt="drawing" width="400"/>
 </p>
 <br>
-The four most recent weighted grade of your Ptf.
+The four most recent weighted grades of your Ptf.
 
+<h3>Step 3</h3>
+Once you have clicked Ok on both windows the detailed results will be charged in the "results.xlsx" file. 
 
 
