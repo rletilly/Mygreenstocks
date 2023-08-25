@@ -22,7 +22,21 @@ This is the current window from where you will start your operations.
 - **"Stock Ticker"** is for stock symbols (NETFLIX -> NFLX
 - **"Amount"** only accepts int numbers, for the number of stocks you have
 - **"Add Stock"** is to be pressed once you've succeddfully added a stock name and an amount
-
+<br>
 - **"Import Excel"** is a function that can be used if you have a Ptf to load following the example in "your_stock_example.xlsx" file
 - **"Help"** can be used if you do not know the ticker of your stock 
 - **"Finish"** MUST be pressed once you've finished using this window (even after loading an excel file) 
+
+
+Once you press the "Finish" button, a Charging indicator will show on the screen until the code has finished. 
+Two boxes are to be expected : 
+![image](https://github.com/rletilly/Mygreenstocks/assets/55627422/74bdaa8f-a26c-4245-83c2-607620f3b241)
+
+The most recent weighted ESG risk score of your portfolio. And 
+
+![image](https://github.com/rletilly/Mygreenstocks/assets/55627422/95ae9957-30a0-46c9-aecb-0ba391c0e0f3)
+
+The four most recent weighted grade of your Ptf.
+
+
+
