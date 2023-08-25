@@ -27,8 +27,8 @@ This is the current window from where you will start your operations.
 - **"Help"** can be used if you do not know the ticker of your stock <br>
 - **"Finish"** MUST be pressed once you've finished using this window (even after loading an excel file) <br>
 <br>
-<br>
-Once you press the "Finish" button, a Charging indicator will show on the screen until the code has finished. 
+Once you press the "Finish" button, a Charging indicator will show on the screen until the code has finished.
+<br> 
 Two boxes are to be expected : <br>
 
 ![image](https://github.com/rletilly/Mygreenstocks/assets/55627422/74bdaa8f-a26c-4245-83c2-607620f3b241)
