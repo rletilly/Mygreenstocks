@@ -8,7 +8,7 @@ Please keep in min that I am using my personal API_KEY for now, we will be limit
 
 In case you wanted to download you stock portfolio directly, you can import it if it respects the format given in the file "your_stock_example.xlsx"  
 
-The "gui.py" file has to be runned for the tool to launch.  
+**The "gui.py" file has to be runned for the tool to launch.**  
 
 # Walkthrough
 
